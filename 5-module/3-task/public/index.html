@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="stylesheet" href="/assets/styles/common.css" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Init Carousel</title>
+  </head>
+  <body>
+    <main>
+      <div class="container" data-carousel-holder>
+        <div class="carousel">
+          <div class="carousel__arrow carousel__arrow_right">
+            <img src="/assets/images/icons/angle-icon.svg" alt="icon">
+          </div>
+          <div class="carousel__arrow carousel__arrow_left">
+            <img src="/assets/images/icons/angle-left-icon.svg" alt="icon">
+          </div>
+  
+          <div class="carousel__inner">
+            <div class="carousel__slide" data-id="penang-shrimp">
+              <img src="/assets/images/carousel/penang_shrimp.png" class="carousel__img" alt="slide">
+              <div class="carousel__caption">
+                <span class="carousel__price">€16.00</span>
+                <div class="carousel__title">Penang shrimp</div>
+                <button type="button" class="carousel__button">
+                  <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+                </button>
+              </div>
+            </div>
+  
+            <div class="carousel__slide" data-id="chicken-cashew">
+              <img src="/assets/images/carousel/chicken_cashew.png" class="carousel__img" alt="slide">
+              <div class="carousel__caption">
+                <span class="carousel__price">€14.00</span>
+                <div class="carousel__title">Chicken cashew</div>
+                <button type="button" class="carousel__button">
+                  <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+                </button>
+              </div>
+            </div>
+  
+            <div class="carousel__slide" data-id="red-curry-veggies">
+              <img src="/assets/images/carousel/red_curry_vega.png" class="carousel__img" alt="slide">
+              <div class="carousel__caption">
+                <span class="carousel__price">€12.50</span>
+                <div class="carousel__title">Red curry veggies</div>
+                <button type="button" class="carousel__button">
+                  <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+                </button>
+              </div>
+            </div>
+  
+            <div class="carousel__slide" data-id="chicken-springrolls">
+              <img src="/assets/images/carousel/chicken_loempias.png" class="carousel__img" alt="slide">
+              <div class="carousel__caption">
+                <span class="carousel__price">€6.50</span>
+                <div class="carousel__title">Chicken springrolls</div>
+                <button type="button" class="carousel__button">
+                  <img src="/assets/images/icons/plus-icon.svg" alt="icon">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  
+    <script src="./index.js">
+    </script>
+    <script>
+      if (initCarousel) {
+        initCarousel();
+      }
+    </script>
+</html>
