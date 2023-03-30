@@ -46,6 +46,9 @@ function Products() {
           <div className="carousel__caption">
             <span className="carousel__price">`€{slide.price}`</span>
             <div className="carousel__title">{slide.name}</div>
+            <button type="button" className="carousel__button">
+               <img src="/images/icons/plus-icon.svg" alt="icon" />
+            </button>
           </div>
         </div>
         ))}
