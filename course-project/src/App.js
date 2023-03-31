@@ -1,6 +1,5 @@
 import React from "react";
-// import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./Carousel/Carousel.css";
 import './styles/common.css';
 import Carousel from "./Carousel/Carousel";
 

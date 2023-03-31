@@ -88,6 +88,34 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .carousel__arrow {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+  }
+  
+  .carousel__arrow_right {
+    right: 0;
+  }
+  
+  .carousel__arrow_left {
+    left: 0;
+  }
+  
+  .carousel__arrow img,
+  .carousel__arrow svg {
+    max-width: 20px;
+  }
   
   @media all and (max-width: 767px) {
     .carousel {
@@ -97,6 +125,20 @@
     .carousel__caption {
       left: 0;
       height: 57px;
+    }
+
+    .carousel__arrow {
+      bottom: 57px;
+    }
+  
+    .carousel__arrow_right img,
+    .carousel__arrow_right svg {
+      margin-top: 0;
+    }
+  
+    .carousel__arrow_left img,
+    .carousel__arrow_left svg {
+      margin-bottom: 0;
     }
   }
   
