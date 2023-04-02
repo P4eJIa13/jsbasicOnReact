@@ -21,8 +21,8 @@ const Table = () => {
       if (statusCell && statusCell.getAttribute('data-available') !== null) {
         const isAvailable = statusCell.getAttribute('data-available') === 'true';
         row.classList.add(isAvailable ? 'available' : 'unavailable');
-        statusCell.removeAttribute('data-available');
-      } else if (statusCell) {
+      } 
+      if (statusCell == null) {
         row.setAttribute('hidden', true);
       }
 
@@ -50,7 +50,7 @@ const Table = () => {
       }
       const ageCell = row.querySelector('td:nth-child(2)');
       if (ageCell) {
-        ageCell.style.textDecoration = '';
+        row.style.textDecoration = '';
       }
     });
 
