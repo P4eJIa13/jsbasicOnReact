@@ -36,8 +36,8 @@ const Carousel = () => {
   ]
   
   let slider = slides.map((slide) =>
-      <div className="carousel__slide" data-id={slide.id}>
-        <img src={slide.image} class="carousel__img" alt="slide" />
+      <div className="carousel__slide" data-id={slide.id} key={slide.id}>
+        <img src={slide.image} className="carousel__img" alt="slide" />
         <div className="carousel__caption">
           <span className="carousel__price">`€{slide.price}`</span>
           <div className="carousel__title">{slide.name}</div>
@@ -46,10 +46,9 @@ const Carousel = () => {
   );
 
   return (
-    <div className="carousel__inner">
+    <>
       {slider}
-    </div>
-
+    </>
   )
 }
 
