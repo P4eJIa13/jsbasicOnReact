@@ -3,46 +3,44 @@ import Categories from "./Categories";
 
 function App() {
   const ribbonInner = useRef(null);
+  const btnPrev = useRef(null);
+  const btnNext = useRef(null);
   const scrollWidth = useRef(null);
 
-  const clickBtnNext = (evt) => {
-    if (evt.target.closest('.ribbon__arrow_right')) {
-      ribbonInner.current.scrollBy(350, 0);
-    }
+  const clickBtnNext = () => {
+    ribbonInner.current.scrollBy(350, 0);
     buttons();
   }
 
-  const clickBtnPrev = (evt) => {
-    if (evt.target.closest('.ribbon__arrow_left')) {
-      ribbonInner.current.scrollBy(-350, 0);
-    }
+  const clickBtnPrev = () => {
+    ribbonInner.current.scrollBy(-350, 0);
     buttons();
   }
 
   const buttons = useCallback(() => {
-    const btnPrev = document.querySelector('.ribbon__arrow_left');
-    const btnNext = document.querySelector('.ribbon__arrow_right');
-    let clientWidth = ribbonInner.current.clientWidth;
+    const clientWidth = ribbonInner.current.clientWidth;
     scrollWidth.current = ribbonInner.current.scrollWidth;
-    let scrollLeft = ribbonInner.current.scrollLeft;
-    let scrollRight = scrollWidth.current - scrollLeft - clientWidth;
+    const scrollLeft = ribbonInner.current.scrollLeft;
+    const scrollRight = scrollWidth.current - scrollLeft - clientWidth;
 
-    if (btnNext && btnPrev) {
+    if (btnNext.current && btnPrev.current) {
      if (scrollLeft === 0) {
-      btnPrev.classList.remove('ribbon__arrow_visible');
+      btnPrev.current.classList.remove('ribbon__arrow_visible');
      } else {
-      btnPrev.classList.add('ribbon__arrow_visible');
+      btnPrev.current.classList.add('ribbon__arrow_visible');
      }
      if (scrollRight < 1) {
-      btnNext.classList.remove('ribbon__arrow_visible');
+      btnNext.current.classList.remove('ribbon__arrow_visible');
      } else {
-      btnNext.classList.add('ribbon__arrow_visible');
+      btnNext.current.classList.add('ribbon__arrow_visible');
      }
     }
   }, [])
 
   useEffect(() => {
     ribbonInner.current = document.querySelector('.ribbon__inner');
+    btnPrev.current = document.querySelector('.ribbon__arrow_left');
+    btnNext.current = document.querySelector('.ribbon__arrow_right');
     
     const handleScroll = () => {
       buttons();
