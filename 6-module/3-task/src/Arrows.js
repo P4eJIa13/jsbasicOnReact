@@ -57,7 +57,7 @@ const Arrows = () => {
         <img src="/images/icons/angle-left-icon.svg" alt="icon" />
       </div>
     <div className="carousel__inner">
-    <Carousel />
+      <Carousel />
     </div>
     </>
   )

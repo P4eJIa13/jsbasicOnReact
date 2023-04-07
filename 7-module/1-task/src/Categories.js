@@ -1,3 +1,5 @@
+import React, {useState} from 'react';
+
 const Categories = () => {
   const categories = [
     {
@@ -38,14 +40,41 @@ const Categories = () => {
     }
   ];
 
+  const [activeCategory, setActiveCategory] = useState('');
 
-return (
-  <>
-    {categories.map(item => (
-      <button className="ribbon__item" data-id={item.id} key={item.id}>{item.name}</button>
-    ))}
-  </>
-)
+  const activeRibbon = ((evt, category) => {
+    evt.preventDefault();
+    const ribbonItem = evt.target.closest('ribbon__item');
+    // let categoryId = ribbonItem.closest('[data-id]').dataset.id;
+    setActiveCategory(category.id);
+    const prevActivItem = document.querySelector('.ribbon__item_active');
+    if (prevActivItem) {
+      prevActivItem.classList.remove('ribbon__item_active');
+    }
+    if (ribbonItem) {
+      ribbonItem.classList.add('ribbon__item_active');
+    }
+    const ribbonSelectEvent = new CustomEvent('ribbon-select', {
+      detail: category.id,
+      bubbles: true
+    });
+    document.documentElement.dispatchEvent(ribbonSelectEvent);
+  })
+
+  return (
+    <>
+      {categories.map(category => (
+        <button 
+          className={`ribbon__item ${category.id === activeCategory ? 'ribbon__item_active' : ''}`}
+          data-id={category.id} 
+          key={category.id} 
+          onClick={(evt) => activeRibbon(evt, category)}
+        >
+          {category.name}
+        </button>
+      ))}
+    </>
+  )
 }
 
 export default Categories;
