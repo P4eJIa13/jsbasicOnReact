@@ -45,7 +45,6 @@ const Categories = () => {
   const activeRibbon = ((evt, category) => {
     evt.preventDefault();
     const ribbonItem = evt.target.closest('ribbon__item');
-    // let categoryId = ribbonItem.closest('[data-id]').dataset.id;
     setActiveCategory(category.id);
     const prevActivItem = document.querySelector('.ribbon__item_active');
     if (prevActivItem) {
