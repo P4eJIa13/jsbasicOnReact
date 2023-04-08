@@ -1,23 +1,54 @@
+import { useState } from "react";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState(null);
+  
+  const ModalButton = {
+    background: "white", 
+    color: "black", 
+    padding: "10px"
+  };
+  
+  const openModal = (title, content) => {
+    setTitle(title);
+    setBody(content);
+    setIsOpen(true);
+    document.body.classList.add("is-modal-open");
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+    document.body.classList.remove("is-modal-open");
+    setTitle("");
+    setBody(null);
+  };
+
   return (
     <div className="container">
+      <button 
+        className="button" 
+        style={ModalButton} 
+        onClick={() => openModal("Заголовок модального окна", "<b>тут содержится тело модального окна</b>")}
+      >
+        Нажми меня, чтобы открыть модальное окно
+      </button>
+      {isOpen && (
       <div className="modal">
-        <div className="modal__overlay"></div>
+        <div className="modal__overlay" onClick={closeModal}></div>
         <div className="modal__inner">
           <div className="modal__header">
-            <button type="button" className="modal__close">
+            <button type="button" className="modal__close" onClick={closeModal}>
               <img src="/icons/cross-icon.svg" alt="close-icon" />
             </button>
-            <h3 className="modal__title">
-              Вот сюда нужно добавлять заголовок
-            </h3>
+            <h3 className="modal__title">{title}</h3>
           </div>
-          <div className="modal__body">
-            А сюда нужно добавлять содержимое модального окна
+          <div className="modal__body" dangerouslySetInnerHTML={{ __html: body }}>
           </div>
         </div>
       </div>
+    )}
     </div>
   );
 }
