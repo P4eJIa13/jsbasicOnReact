@@ -15,12 +15,12 @@ function StepSlider({ config }) {
     });
   }, [value]);
 
-  const handleThumbDrag = (e) => {
+  const handleThumbDrag = (event) => {
     const thumb = sliderRef.current.querySelector('.slider__thumb');
     const progress = sliderRef.current.querySelector('.slider__progress');
     const steps = sliderRef.current.querySelectorAll('.slider__steps span');
     const sliderRect = sliderRef.current.getBoundingClientRect();
-    const offsetX = e.clientX - sliderRect.left;
+    const offsetX = event.clientX - sliderRect.left;
 
     let newValue = Math.round(((config.steps - 1) * offsetX) / sliderRect.width);
 
