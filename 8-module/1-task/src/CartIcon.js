@@ -13,7 +13,7 @@ function CartIcon({ cart }) {
 
     updatePosition();
     cartIcon.classList.add('shake');
-    cartIcon.addEventListener('transitionend', () => {
+    cartIcon.removeEventListener('transitionend', () => {
       cartIcon.classList.remove('shake');
     }, {once: true})
 
@@ -21,20 +21,37 @@ function CartIcon({ cart }) {
       document.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, [cart.products.length]);
+  }, [cart]);
+
+  useEffect(() => {
+    if (cart.products.length > 0) {
+      setVisible(true);
+      const cartIcon = document.querySelector('.cart-icon');
+      cartIcon.classList.add('cart-icon_visible');
+    } else {
+      setVisible(false);
+      const cartIcon = document.querySelector('.cart-icon');
+      cartIcon.classList.remove('cart-icon_visible');
+    }
+  }, [cart.products])
 
   const updatePosition = () => {
     const cartIcon = document.querySelector('.cart-icon');
     const cartIconRect = cartIcon.getBoundingClientRect();
     let iconTopCoord = cartIconRect.top;
+    let initialTopCoord = iconTopCoord + window.pageYOffset;
     const iconWidth = cartIcon.offsetWidth;
     const windowWidth = document.documentElement.clientWidth;
     const container = document.querySelector('.container');
-    const cartIconVisible = cart.products.length !== 0; 
+    const cartIconVisible = cart.products.length > 0; 
+    const shouldVisible = cartIconVisible && (window.pageYOffset > initialTopCoord || windowWidth < 767);
+    // const shouldVisible = cartIconVisible && ((iconTopCoord + window.pageYOffset < window.innerHeight) || windowWidth < 767);
 
-    if (cartIconVisible && window.pageYOffset > iconTopCoord) {
-      setVisible(true);
-      cartIcon.classList.add('cart-icon_visible');
+    if (shouldVisible !== visible) {
+      setVisible(shouldVisible);
+    }
+
+    if (shouldVisible) {
       let leftIndent = Math.min(
         container.getBoundingClientRect().right + 20,
         windowWidth - iconWidth - 10
@@ -44,31 +61,26 @@ function CartIcon({ cart }) {
       cartIcon.style.right = '10px';
       cartIcon.style.zIndex = 1e3;
       cartIcon.style.left = leftIndent;
-    } else if (windowWidth <= 767) {
-      cartIcon.style.position = '';
-      cartIcon.style.top = '';
-      cartIcon.style.right = '';
-      cartIcon.style.zIndex = '';
-      cartIcon.style.left = `{{windowWidth - iconWidth - 10}}`;
     } else {
       cartIcon.style.position = '';
       cartIcon.style.top = '';
       cartIcon.style.right = '';
       cartIcon.style.zIndex = '';
       cartIcon.style.left = '';
-      setVisible(false);
-      cartIcon.classList.remove('cart-icon_visible');
     }
   }
 
   return (
-    <div
-      className={`cart-icon ${visible ? 'cart-icon_visible' : ''}`}
-    >
+    <div className="cart-icon">
     {cart.products.length === 0 ? null : (
       <div className="cart-icon__inner">
         <span className="cart-icon__count">{cart.products.length}</span>
-        <span className="cart-icon__price">€{cart.products.reduce((totalPrice, product) => totalPrice + product.price, 0).toFixed(2)}</span>
+        <span className="cart-icon__price">
+          €
+          {cart.products
+          .reduce((totalPrice, product) => totalPrice + product.price, 0)
+          .toFixed(2)}
+        </span>
       </div>
     )}
     </div>
