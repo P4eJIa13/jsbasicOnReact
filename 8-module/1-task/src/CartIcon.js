@@ -27,6 +27,7 @@ function CartIcon({ cart }) {
     if (cart.products.length > 0) {
       setVisible(true);
       const cartIcon = document.querySelector('.cart-icon');
+      cartIcon.classList.remove('shake');
       cartIcon.classList.add('cart-icon_visible');
     } else {
       setVisible(false);
